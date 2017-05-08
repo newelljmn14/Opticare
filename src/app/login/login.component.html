@@ -1,0 +1,24 @@
+<h1>Opticare</h1>
+
+<div class="float-sm-right">
+  <h2>Sign up</h2>
+  <label for="emailRegistration">Email: </label>
+  <input #emailRegistrationField type="text">
+
+  <label for="passwordRegistration">Password: </label>
+  <input #passwordRegistrationField type="text">
+
+  <button (click)="register(emailRegistrationField.value, passwordRegistrationField.value)">register</button>
+</div>
+
+<div>
+  <h2>Login in</h2>
+  <label for="emailSignIn">Email: </label>
+  <input #emailSignInField type="text">
+
+  <label for="passwordSignIn">Password: </label>
+  <input #passwordSignInField type="text">
+
+  <button (click)="login(emailSignInField.value, passwordSignInField.value)">login</button>
+  <button (click)="logout()">logout</button>
+</div>

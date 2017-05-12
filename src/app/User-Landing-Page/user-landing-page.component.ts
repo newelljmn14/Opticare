@@ -10,17 +10,16 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./user-landing-page.component.css']
 })
 export class UserLandingPageComponent implements OnInit {
-	private siteNameModel = { siteName: '' };
 	private healthcareProviders: FirebaseListObservable<any []>;
 	private listOfProviders: any[];
 	private results: string[];
-	subscription;
+	private subscription;
 
   constructor(private afDB: AngularFireDatabase) { }
 
   ngOnInit() {
 	this.healthcareProviders = this.afDB.list('/healthcare-providers');
-	
+
 	this.subscription = this.afDB.list('/healthcare-providers')
 		.subscribe(providers => {
 			this.listOfProviders = providers;
@@ -47,14 +46,4 @@ export class UserLandingPageComponent implements OnInit {
 		}
 		this.results = matchingProviders;
 	}
-
-	public getListOfProviders() {
-		this.healthcareProviders.subscribe(responseList => {
-			responseList.forEach(responseObject => {
-				this.listOfProviders.push(responseObject.name);
-			});
-			console.log(this.listOfProviders[0]);
-		});
-	}
-
 }

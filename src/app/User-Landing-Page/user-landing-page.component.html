@@ -30,25 +30,27 @@
 
 <div class="float-right">
   <h6 class="display-3">Get started by entering the health-care provider you wish to be registered with</h6>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
-
-<div id="add-site">
-  <h6>(to be used on admin side)</h6>
-    <input #providerNameField type="text" placeholder="e.g. St. Vincent's">
-    <button (click)="saveProviderToDB(providerNameField.value)">Add health-care provider</button>
 </div>
 
 <div *ngIf="listOfProviders">
-  <h6>search providers</h6>
-  <input #searchProvidersField type="text" (keyup)="matchSearchWithProviders(searchProvidersField.value, listOfProviders)">
+  <label style='font-size: 20px'>Search Providers:</label>
+  <input #searchProvidersField type="text"
+    (keyup)="matchSearchWithProviders(searchProvidersField.value, listOfProviders)">
+  <button class="btn btn-outline-success">Search</button>
   <div>
     <ul>
       <li *ngFor="let result of results">{{ result }}</li>
     </ul>
   </div>
 </div>
+
+<div id="add-site">
+  <h6>(to be used on admin side)</h6>
+    <input #providerNameField type="text" placeholder="e.g. St. Vincent's">
+    <button (click)="saveProviderToDB(providerNameField.value); providerNameField.value=''">
+      Add health-care provider
+    </button>
+</div>
+
+
 

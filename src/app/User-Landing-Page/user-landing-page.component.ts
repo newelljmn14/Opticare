@@ -12,24 +12,20 @@ import { Observable } from 'rxjs/Observable';
 export class UserLandingPageComponent implements OnInit {
 	private siteNameModel = { siteName: '' };
 	private healthcareProviders: FirebaseListObservable<any []>;
-	private listOfProviders: FirebaseListObservable<any []> = <any>[];
+	private listOfProviders: any[];
 	private results: string[];
 	subscription;
 
   constructor(private afDB: AngularFireDatabase) { }
 
   ngOnInit() {
-	// this.healthcareProviders = this.afDB.list('/healthcare-providers');
-
-	this.afDB.list('/healthcare-providers').subscribe(value => console.log(value));
+	this.subscription = this.afDB.list('/healthcare-providers')
+		.subscribe(providers => {
+			this.listOfProviders = providers;
+			// console.log(providers);
+		});
 
 	// this.matchSearchWithProvider('S');
-
-	// this.healthcareProviders.subscribe(value => {
-	// 	console.log('value of subscribe: ', value);
-
-	// });
-
 
 	}
 
@@ -37,11 +33,12 @@ export class UserLandingPageComponent implements OnInit {
 		this.healthcareProviders.push(name);
 	}
 
-	public matchSearchWithProvider(searchInput: string) {
+
+	// for(let provider of providersList) {console.log("in html", provider)}
+	public matchSearchWithProviders(searchInput: string, providersList) {
 		let matchingProviders: string[] = [];
-		this.healthcareProviders.forEach(providerArray => {
-			for(let provider of providerArray) {
-				let matched = true;
+		for(let provider of providersList) {
+			let matched = true;
 				for(let letterIndex = 0; letterIndex < searchInput.length; letterIndex++) {
 					if(searchInput[letterIndex] !== provider['name'][letterIndex]) {
 						matched = false;
@@ -50,12 +47,31 @@ export class UserLandingPageComponent implements OnInit {
 				if(matched) {
 					matchingProviders.push(provider.name);
 				}
-			}
-		})
-		.catch(err => console.log(err));
+		}
 		this.results = matchingProviders;
-		console.log(this.results);
 	}
+
+
+
+	// public matchSearchWithProviders(searchInput: string) {
+	// 	let matchingProviders: string[] = [];
+	// 	this.healthcareProviders.forEach(providerArray => {
+	// 		for(let provider of providerArray) {
+	// 			let matched = true;
+	// 			for(let letterIndex = 0; letterIndex < searchInput.length; letterIndex++) {
+	// 				if(searchInput[letterIndex] !== provider['name'][letterIndex]) {
+	// 					matched = false;
+	// 				}
+	// 			}
+	// 			if(matched) {
+	// 				matchingProviders.push(provider.name);
+	// 			}
+	// 		}
+	// 	})
+	// 	.catch(err => console.log(err));
+	// 	this.results = matchingProviders;
+	// 	console.log(this.results);
+	// }
 
 
 	public getListOfProviders() {

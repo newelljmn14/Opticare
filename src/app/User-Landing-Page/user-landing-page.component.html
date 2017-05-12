@@ -42,10 +42,6 @@
     <button (click)="saveProviderToDB(providerNameField.value)">Add health-care provider</button>
 </div>
 
-<!--<div *ngIf="listOfProviders">
-  <div *ngFor="let provider of listOfProviders">{{provider.name}}</div>
-</div>-->
-
 <div *ngIf="listOfProviders">
   <h6>search providers</h6>
   <input #searchProvidersField type="text" (keyup)="matchSearchWithProviders(searchProvidersField.value, listOfProviders)">

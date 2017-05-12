@@ -19,22 +19,19 @@ export class UserLandingPageComponent implements OnInit {
   constructor(private afDB: AngularFireDatabase) { }
 
   ngOnInit() {
+	this.healthcareProviders = this.afDB.list('/healthcare-providers');
+	
 	this.subscription = this.afDB.list('/healthcare-providers')
 		.subscribe(providers => {
 			this.listOfProviders = providers;
-			// console.log(providers);
 		});
-
-	// this.matchSearchWithProvider('S');
-
 	}
 
 	public saveProviderToDB(name: any) {
-		this.healthcareProviders.push(name);
+		let formattedName = { name: name };
+		this.healthcareProviders.push(formattedName);
 	}
 
-
-	// for(let provider of providersList) {console.log("in html", provider)}
 	public matchSearchWithProviders(searchInput: string, providersList) {
 		let matchingProviders: string[] = [];
 		for(let provider of providersList) {
@@ -50,29 +47,6 @@ export class UserLandingPageComponent implements OnInit {
 		}
 		this.results = matchingProviders;
 	}
-
-
-
-	// public matchSearchWithProviders(searchInput: string) {
-	// 	let matchingProviders: string[] = [];
-	// 	this.healthcareProviders.forEach(providerArray => {
-	// 		for(let provider of providerArray) {
-	// 			let matched = true;
-	// 			for(let letterIndex = 0; letterIndex < searchInput.length; letterIndex++) {
-	// 				if(searchInput[letterIndex] !== provider['name'][letterIndex]) {
-	// 					matched = false;
-	// 				}
-	// 			}
-	// 			if(matched) {
-	// 				matchingProviders.push(provider.name);
-	// 			}
-	// 		}
-	// 	})
-	// 	.catch(err => console.log(err));
-	// 	this.results = matchingProviders;
-	// 	console.log(this.results);
-	// }
-
 
 	public getListOfProviders() {
 		this.healthcareProviders.subscribe(responseList => {

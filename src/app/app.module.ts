@@ -13,6 +13,7 @@ import { AccountCreatorComponent } from 'app/Account-Creator/account-creator.com
 import { AppointmentSchedulerComponent } from 'app/Appointment-Scheduler/appointment-scheduler.component';
 import { UserLandingPageComponent } from 'app/User-Landing-Page/user-landing-page.component';
 import { AdminAppointmentSchedulerService } from 'app/Appointment-Scheduler/admin-appointment-scheduler.service';
+import { SearchedProvidersComponent } from './searched-providers/searched-providers.component';
 
 const routes: Routes = [
   { path: 'user-landing-page', component: UserLandingPageComponent},
@@ -38,7 +39,8 @@ const firebaseConfiguration = {
     LoginComponent,
     AccountCreatorComponent,
     UserLandingPageComponent,
-    AppointmentSchedulerComponent
+    AppointmentSchedulerComponent,
+    SearchedProvidersComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

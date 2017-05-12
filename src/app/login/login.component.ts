@@ -30,11 +30,6 @@ export class LoginComponent implements OnInit {
       console.log(authState.uid);
       console.log(this.email);
 
-      // propery sends email verification to current user but should be located in register method:
-      // this.afAuth.auth.currentUser.sendEmailVerification()
-      //   .then(status => console.log('should send email verification'))
-      //   .catch(err => console.log(err));
-
       this.authenticatedUsers = this.afDB.list('/authenticated-users');
     });
   }
@@ -45,7 +40,9 @@ export class LoginComponent implements OnInit {
         console.log('Register-Then', authState);
         this.saveInfoToDB(emailInput, passwordInput);
 
-        //placeholder for sendEmailVerification function
+        this.afAuth.auth.currentUser.sendEmailVerification()
+          .then(status => console.log('should send email verification'))
+          .catch(err => console.log('error sending email verify: ', err));
       })
       .catch(error => this.error = error.message);
   }
@@ -70,11 +67,10 @@ export class LoginComponent implements OnInit {
   }
 
   private saveInfoToDB(emailInput: string, passwordInput: string) {
-    let credentials = { email: emailInput, password: passwordInput, uid: this.afAuth.auth.currentUser.uid };
-    this.authenticatedUsers.push(credentials);
+    let currentUserUid = this.afAuth.auth.currentUser.uid;
+    let credentials = { email: emailInput, password: passwordInput, uid: currentUserUid };
+    this.afDB.object('/authenticated-users/' + currentUserUid + '/info').set(credentials)
+      .catch(err => console.log('error with posting: ', err));
   }
 
 }
-
-// jnewell1@samford.edu: opticare!
-// chrometotem@gmail.com: opticare14!

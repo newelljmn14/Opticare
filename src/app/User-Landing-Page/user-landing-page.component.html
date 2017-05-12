@@ -36,7 +36,9 @@
   <label style='font-size: 20px'>Search Providers:</label>
   <input #searchProvidersField type="text"
     (keyup)="matchSearchWithProviders(searchProvidersField.value, listOfProviders)">
-  <button class="btn btn-outline-success">Search</button>
+  <button class="btn btn-outline-success" (click)='searchedProvidersWasClicked=true'>Search</button>
+    <app-searched-providers class="float-right" [listOfProviders]='listOfProviders' *ngIf='searchedProvidersWasClicked'>
+    </app-searched-providers>
   <div>
     <ul>
       <li *ngFor="let result of results">{{ result }}</li>
@@ -51,6 +53,3 @@
       Add health-care provider
     </button>
 </div>
-
-
-

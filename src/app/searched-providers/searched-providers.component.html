@@ -1,0 +1,10 @@
+<!--to do: modify select button to redirect user to the provider's page (or website?)-->
+
+<div *ngIf="listOfProviders">
+  <div *ngFor="let provider of listOfProviders"> 
+    {{provider.name}} <button>select</button> <button>register with this provider</button>
+    <div>
+      {{provider.city}}
+    </div>
+  </div>
+</div>

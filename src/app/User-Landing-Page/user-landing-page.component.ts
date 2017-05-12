@@ -14,6 +14,7 @@ export class UserLandingPageComponent implements OnInit {
 	private listOfProviders: any[];
 	private results: string[];
 	private subscription;
+	private searchedProvidersWasClicked = false;
 
   constructor(private afDB: AngularFireDatabase) { }
 

@@ -25,6 +25,8 @@ export class UserLandingPageComponent implements OnInit {
 		.subscribe(providers => {
 			this.listOfProviders = providers;
 		});
+
+	this.getProviderCityByName();
 	}
 
 	public saveProviderToDB(name: any) {
@@ -46,5 +48,14 @@ export class UserLandingPageComponent implements OnInit {
 				}
 		}
 		this.results = matchingProviders;
+	}
+
+	getProviderCityByName() {
+		this.afDB.list('/healthcare-providers', {
+		query: {
+			orderByChild: 'city',
+			equalTo: 'Atlanta'
+		}
+		}).subscribe(value => console.log('query', value));
 	}
 }

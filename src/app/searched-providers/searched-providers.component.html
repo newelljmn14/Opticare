@@ -2,9 +2,12 @@
 
 <div *ngIf="listOfProviders">
   <div *ngFor="let provider of listOfProviders"> 
-    {{provider.name}} <button>select</button> <button>register with this provider</button>
+    {{provider.name}}
+    <button>select</button> 
+    <button (click)='registerWithProvider(provider.name)'>register with this provider</button>
     <div>
       {{provider.city}}
     </div>
   </div>
 </div>
+<button (click)='testFunction()'>test</button>

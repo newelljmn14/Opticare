@@ -4,10 +4,13 @@
   <div *ngFor="let provider of listOfProviders"> 
     {{provider.name}}
     <button>select</button> 
-    <button (click)='registerWithProvider(provider.name)'>register with this provider</button>
+    <button (click)='registerProviderWithUser(provider.name); updateUserForms(provider); registerUserWithProvider(provider)'>
+      <!--updateUserForms(provider[required-forms])-->
+      register with this provider</button>
     <div>
       {{provider.city}}
     </div>
   </div>
 </div>
 <button (click)='testFunction()'>test</button>
+<button (click)='otherFunction()'>other</button>

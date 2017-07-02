@@ -4,7 +4,9 @@
   <div *ngFor="let provider of listOfProviders"> 
     {{provider.name}}
     <button>select</button> 
-    <button (click)='registerProviderWithUser(provider.name); updateUserForms(provider); registerUserWithProvider(provider)'>
+    <button (click)='registerProviderWithUser(provider.name); 
+                     registerUserWithProvider(provider);
+                     addToUserForms(provider)'>
       <!--updateUserForms(provider[required-forms])-->
       register with this provider</button>
     <div>
@@ -12,5 +14,3 @@
     </div>
   </div>
 </div>
-<button (click)='testFunction()'>test</button>
-<button (click)='otherFunction()'>other</button>

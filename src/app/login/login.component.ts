@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // modify to automatically log user in when registers
   public register(emailInput: string, passwordInput: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(emailInput, passwordInput)
       .then(authState => {
